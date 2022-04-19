@@ -6,20 +6,26 @@
 // a number of minutes as an argument and returns
 // the number of seconds
 
-function convertToSeconds() {}
+function convertToSeconds(minutes) {
+    return minutes * 60;
+}
 
 console.log(`convertToSeconds(10) === 600 : ${convertToSeconds(10) === 600}`);
 
 // 2. areaOfTriangle
 // Write a function called areaOfTriangle that takes in the base and height
 // of a triangle and returns its area
-function areaOfTriangle() {}
+function areaOfTriangle(base, height) {
+    return (base * height) / 2;
+}
 console.log(`areaOfTriangle(5, 10) === 25 : ${areaOfTriangle(5, 10) === 25}`);
 
 // 3. lessThan100
 // Given 2 numbers, return true if their sum is less than 100
 // return false if it is greater than 100
-function lessThan100() {}
+function lessThan100(a, b) {
+    return a + b > 100 ? false : true;
+}
 console.log(`lessThan100(5, 10) === true : ${lessThan100(5, 10) === true}`);
 console.log(`lessThan100(100, 10) === false : ${lessThan100(100, 10) === false}`);
 
@@ -28,7 +34,11 @@ console.log(`lessThan100(100, 10) === false : ${lessThan100(100, 10) === false}`
 // that accepts a first_name and last_name as required parameters
 // and a third parameter called middle_name which is optional.
 // The function should return a string with the first, middle and last names
-function getFormattedName() {}
+function getFormattedName(first_name, last_name, middle_name) {
+    return middle_name
+        ? first_name + ' ' + middle_name + ' ' + last_name
+        : first_name + ' ' + last_name;
+}
 console.log(
     `getFormattedName('Ruth', 'Ginsburg') === 'Ruth Ginsburg': ${
         getFormattedName('Ruth', 'Ginsburg') === 'Ruth Ginsburg'
@@ -50,10 +60,57 @@ console.log(
 //    that checks if the year is a leap year, and returns the correct
 //    number of days for Feb. The default value for the year should be
 //    the current year
-function daysInMonth() {}
+function daysInMonth(month, year) {
+    const leapYearArray = [
+        1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 1632, 1636, 1640,
+        1644, 1648, 1652, 1656, 1660, 1664, 1668, 1672, 1676, 1680, 1684, 1688, 1692, 1696, 1704,
+        1708, 1712, 1716, 1720, 1724, 1728, 1732, 1736, 1740, 1744, 1748, 1752, 1756, 1760, 1764,
+        1768, 1772, 1776, 1780, 1784, 1788, 1792, 1796, 1804, 1808, 1812, 1816, 1820, 1824, 1828,
+        1832, 1836, 1840, 1844, 1848, 1852, 1856, 1860, 1864, 1868, 1872, 1876, 1880, 1884, 1888,
+        1892, 1896, 1904, 1908, 1912, 1916, 1920, 1924, 1928, 1932, 1936, 1940, 1944, 1948, 1952,
+        1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012,
+        2016, 2020, 2024,
+    ];
+    const daysInMonthObj = {
+        1: 31,
+        2: !year ? 29 : leapYearArray.includes(year) ? 29 : 28, 
+        3: 31,
+        4: 30,
+        5: 31,
+        6: 30,
+        7: 31,
+        8: 31,
+        9: 30,
+        10: 31,
+        11: 30,
+        12: 31,
+    };
+    return month > 12 || month < 1 ? 'There is no month by that number' : daysInMonthObj[month];
+}
 console.log(`daysInMonth(2) === 29: ${daysInMonth(2) === 29}`);
 console.log(`daysInMonth(3) === 31: ${daysInMonth(3) === 31}`);
 console.log(`daysInMonth(11) === 30: ${daysInMonth(11) === 30}`);
+console.log(
+    `daysInMonth(13) === There is no month by that number: ${
+        daysInMonth(13) === 'There is no month by that number'
+    }`
+);
+console.log(
+    `daysInMonth(0) === There is no month by that number: ${
+        daysInMonth(0) === 'There is no month by that number'
+    }`
+);
+console.log(
+    `daysInMonth(2) === 28: ${
+        daysInMonth(2, 2021) === 28
+    }`
+);
+console.log(
+    `daysInMonth(2) === 29: ${
+        daysInMonth(2, 2020) === 29
+    }`
+);
+
 
 // Additional Practice
 // - [Multiply](https://www.codewars.com/kata/50654ddff44f800200000004)
